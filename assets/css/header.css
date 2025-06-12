@@ -1,0 +1,225 @@
+@font-face {
+    font-family: "openSans";
+    src:
+      local("OpenSans"),
+      url("../fonts/OpenSans-VariableFont_wdth\,wght.ttf")
+    }
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4B3B2A;
+    width: 100%;
+
+}
+
+.menuDesktop{
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    width: 15.625rem;
+    height: 9.375rem;
+    display: flex;
+    align-items: center;
+    margin-left: 2%;
+}
+
+.desktop {
+    display: flex;
+    margin-left: 5%;
+    
+}
+
+.menu {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.navbarList {
+    width: 200px;
+    margin-right: 5%;
+    border-radius: 7px;
+    padding: 1%;
+   
+
+
+   
+}
+
+.navbarList:hover{
+    box-shadow: 1px 5px 0px #D8A848;
+}
+
+.navbarList a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-family: "OpenSans";
+
+}
+
+.devisBtn{
+    width: 220px;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 1rem;
+    background-color: #D8A848;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    
+}
+
+.devisBtn a{
+    color: black;
+    text-decoration: none;
+    font-family: "OpenSans";
+    
+}
+
+.devisBtn:hover{
+
+    box-shadow: 10px 10px 5px #7D431D;
+}
+
+.menuMobile {
+    display: none;
+    position: relative;
+    
+  
+    
+}
+
+.burgerLogo {
+    font-size: 2rem;
+    cursor: pointer;
+    user-select: none;
+    color: white;
+}
+
+.burger {
+    display: none;
+    flex-direction: column;
+    /* align-items: center; */
+    background-color: #4B3B2A;
+    position: absolute;
+    top: 3rem;
+    right: 0;
+    padding: 1rem;
+   
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+}
+
+.burger a {
+    text-decoration: none;
+    color: white;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    
+    border-radius: 7px;
+    padding: 0.5rem;
+    font-size: 15px;
+}
+
+.burger a:hover {
+
+    border-radius: 5px;
+    box-shadow: 1px 5px 0px #D8A848;
+}
+
+.burger.active {
+    display: flex;
+    justify-content: center;
+    
+
+}
+
+@media (min-width:768px) and (max-width:1280px){
+    .navbarList, .devisBtn {
+        display: none;
+    }
+
+    .logo img{
+
+        width: 10.5rem;
+        height: 6.25rem;
+    }
+
+    .menuMobile {
+        display: block;
+        margin-left: auto;
+        margin-right: 2%;
+        z-index: 10;
+        
+        
+        
+    }
+
+    .burger{
+        width:700px;
+    }
+
+
+
+
+
+    .burgerLogo, .burgerHiden {
+        cursor: pointer;
+        font-size: 2rem; /* Ajustez la taille selon vos besoins */
+        color: white;
+    } 
+}
+
+    @media (max-width:767px){
+        .navbarList, .devisBtn {
+            display: none;
+        }
+    
+        .logo img{
+    
+            width: 10rem;
+            height: 4rem;
+        }
+    
+        .menuMobile {
+            display: block;
+            margin-left: auto;
+            margin-right: 2%;
+            z-index: 10;
+            
+            
+            
+        }
+
+        .burgerLogo, .burgerHiden {
+            cursor: pointer;
+            font-size: 2rem; /* Ajustez la taille selon vos besoins */
+            color: white;
+        } 
+
+        .burger{
+            width:320px;
+        }
+
+
+
+    
+       
+            
+        }
+        
+        
+
+        
+
+   
+

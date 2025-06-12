@@ -1,0 +1,124 @@
+@font-face {
+    font-family: "openSans";
+    src:
+      local("OpenSans"),
+      url("../fonts/OpenSans-VariableFont_wdth\,wght.ttf")
+    }
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.titreConnexion{
+    margin: 2%;
+    font-size: 2.5rem;
+    text-align: center;
+    font-family: "OpenSans";
+    background-color: #D8A848;
+    box-shadow: 10px 5px 8px #D8A848;
+}
+
+
+
+
+.formConnexion{
+     background-color: beige;
+    width: 70%;
+    border: 2px solid #D8A848;
+    border-radius: 2%;
+    margin-bottom: 2%;
+    margin-left: 15%;
+    margin-right: 10%;
+    margin-top: 5%;
+   
+    
+}
+
+.labelConnexion{
+    
+   display: block;
+    font-weight: bold;
+    font-size: large;
+    margin-bottom: 1%;
+    margin-left: 2%;;
+   
+}
+
+.form-group{
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+
+
+
+
+.form-group input{
+   width: 80%;
+    margin-left: 2%;
+    margin-right: 2%;
+    padding: 1%;
+}
+
+
+.btn_connexion{
+     margin-top: 1%;
+    margin-left: 7%;
+    margin-bottom: 1%;
+    width: 25%;
+    background-color: #D8A848;
+    padding: 1%;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    font-size: large;
+
+}
+
+
+  .voir {
+    border: none;
+    cursor: pointer;
+    background-color: beige;
+}
+
+.eye-icon {
+    width: 1rem;
+    /* height: auto; */
+}
+
+.register-link {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    margin-bottom: 10%;
+}
+
+@media (max-width: 767px){
+    .titreConnexion{
+        font-size: 1.2rem;
+    }
+
+.form-group input{
+   width: 80%;
+}
+    
+    .btn_connexion{
+        margin-top: 4%;
+        margin-bottom: 2%;
+        font-size: small;
+        width: 75%;
+    }
+
+    .register-link{
+    font-size: 0.9rem;
+     
+    }
+}
+
+
+
+

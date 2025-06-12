@@ -1,0 +1,60 @@
+
+<body>
+    <main class="inscription">
+        <h1 class="titreInscription">Inscription</h1>
+        <form class="formInscription" action="assets/php/inscription.php" method="POST" enctype="multipart/form-data">
+          <div class="form-group1">
+            <label class="labelInscription" for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" required placeholder="Indiquer votre nom">
+          </div>
+          <div class="form-group1">
+            <label class="labelInscription" for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" required placeholder="Indiquer votre prénom">
+          </div>
+          <div class="form-group1">
+            <label class="labelInscription" for="email">E-mail :</label>
+            <input type="email" id="email" name="email" required placeholder="Indiquer votre email">
+          </div>
+          <div class="form-group1">
+            <label class="labelInscription" for="mdp">Mot de passe :</label>
+            <input type="password" id="mdp" name="mdp" required placeholder="Entrer votre mot de passe">
+            <button type="button" class="voir" onclick="togglePassword('mdp', this)">
+                <img class="eye-icon" src="assets/img/oeil.png" alt="afficher le mot de passe" id="eye-open-mdp" >
+                <img class="eye-icon" src="assets/img/cacher.png" alt="cacher le mot de passe" id="eye-closed-mdp" style="display:none;">
+            </button>
+          </div>
+          <div class="form-group1">
+            <label class="labelInscription" for="mdp2">Confirmer le mot de passe :</label>
+            <input type="password" id="mdp2" name="mdp2" required placeholder="Entrer le mot de passe de confirmation">
+            <button type="button" class="voir" onclick="togglePassword('mdp2', this)">
+                <img class="eye-icon" src="assets/img/oeil.png" alt="afficher le mot de passe" id="eye-open-mdp2">
+                <img class="eye-icon" src="assets/img/cacher.png" alt="cacher le mot de passe" id="eye-closed-mdp2" style="display:none;">
+            </button>
+          </div>
+          <div class="form-group1">
+            <label class="labelInscription" for="telephone">Téléphone :</label>
+            <input type="tel" id="telephone" name="telephone" required placeholder="Indiquer votre N° de téléphone">
+          </div>
+          <div class="form-group1">
+            <label class="labelInscription" for="adresse">Adresse :</label>
+            <input type="text" id="adresse" name="adresse" required placeholder="indiquer votre adresse">
+          </div>
+        
+          <div class="form-group1">
+            <label class="labelInscription" for="CP">Code postal :</label>
+            <input type="number" id="CP" name="CP" required placeholder="indiquer votre code postal">
+          </div>
+          <div class="form-group1">
+            <label class="labelInscription" for="ville">Ville :</label>
+            <input type="text" id="ville" name="ville" required placeholder="Indiquer votre ville">
+          </div>
+          <div class="form-group1">
+            <label class="labelInscription" for="pays">Pays :</label>
+            <input type="text" id="pays" name="pays" required placeholder="Indiquer votre pays">
+          </div>
+          <button class="btn_inscription" type="submit" name="submitInscription">Inscription</button>
+        </form>
+    </main> 
+      <script src="assets/js/inscription.js"></script>
+</body>
+</html>

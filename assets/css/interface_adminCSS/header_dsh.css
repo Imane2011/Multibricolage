@@ -1,0 +1,80 @@
+/* styles pour l'en-tête */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+}
+
+.menuDesktop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo img {
+    height: 50px;
+}
+
+nav.desktop {
+    display: flex;
+}
+
+.menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.navbarList {
+    margin: 0 15px;
+}
+
+.navbarList a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.navbarList a:hover {
+    color: #ff9900;
+}
+
+/* styles pour le menu mobile */
+.menuMobile {
+    display: none;
+}
+
+.burgerLogo {
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+}
+
+.burgerHiden {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .menuDesktop {
+        display: none;
+    }
+
+    .menuMobile {
+        display: block;
+    }
+
+    .burgerHiden {
+        display: block;
+    }
+
+    .burger {
+        display: none;
+    }
+
+    .burger.active {
+        display: block;
+    }
+
+}

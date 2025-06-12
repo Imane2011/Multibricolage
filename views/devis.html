@@ -1,0 +1,64 @@
+
+<body>
+    <main class="devis">
+    <h1 class="titreDevis">Demande de devis</h1>
+     <form class="formDevis" action="assets/php/devis.php" method="post">
+      <div class="formGroup1">
+        <label class="labelDevis" for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" required placeholder="Indiquez votre nom">
+    </div>
+    <div class="formGroup1">
+        <label class="labelDevis" for="prenom">Prénom :</label>
+        <input type="text" id="prenom" name="prenom" required placeholder="Indiquez votre prenom">
+    </div>
+    <div class="formGroup1">
+        <label class="labelDevis" for="mail">Email:</label>
+        <input type="email" id="mail" name="email" required placeholder="Indiquez votre email">
+    </div>
+    <div class="formGroup1">
+        <label class="labelDevis" for="tel">Téléphone :</label>
+        <input type="tel" id="tel" name="telephone" required placeholder="Indiquez votre N° de téléphone">
+    </div>
+    <div class="formGroup1">
+            <label class="labelDevis" for="adresse">Adresse :</label>
+            <input type="text" id="adresse" name="adresse" required placeholder="indiquer votre adresse">
+          </div>
+      
+    <div class="formGroup1">
+            <label class="labelDevis" for="CP">Code postal :</label>
+            <input type="number" id="CP" name="CP" required placeholder="indiquer votre code postal">
+          </div>
+          <div class="formGroup1">
+            <label class="labelDevis" for="ville">Ville :</label>
+            <input type="text" id="ville" name="ville" required placeholder="Indiquer votre ville">
+          </div>
+          <div class="formGroup1">
+            <label class="labelDevis" for="pays">Pays :</label>
+            <input type="text" id="pays" name="pays" required placeholder="Indiquer votre pays">
+          </div>
+    <div class="formGroup1">
+      <label class="labelDevis" for="services">Services :</label>
+      <div class="select">
+        <select name="services" id="services">
+          <option value="Service 1">Plomberie</option>
+          <option value="Service 2">Électricité</option>
+          <option value="Service 3">Revêtement de sol</option>
+          <option value="Service 4">Montage de meubles</option>
+          <option value="Service 5">Tapisserie</option>
+          <option value="Service 6">Rénovation logement & Isolation</option>
+          <option value="Service 7">Clôture & aménagement exterieur</option>
+
+        </select>
+      </div>
+    </div>
+    <div class="formGroup1">
+      <label class="labelDevis" for="info">Informations complémantaire :</label>
+      <textarea class="infoSup" name="info" id="info" rows="10" cols="50"></textarea>
+    </div>
+    <div class="btnDevis">
+         <button class=submitDevis type="submit" name="submitDevis">Envoyer</button>
+        </div>
+    </form>
+    </main>
+</body>
+</html>

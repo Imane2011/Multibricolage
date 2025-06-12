@@ -1,0 +1,142 @@
+/* styles pour le corps de la page */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+
+
+/* styles pour le titre principal */
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.titreService{
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+/* styles pour le bouton de déconnexion */
+.btnDeconnexion {
+    background-color: #ff9900;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    float: right;
+}
+
+.btnDeconnexion:hover {
+    background-color: #e68a00;
+}
+
+/* styles pour la gestion des services */
+h2 {
+    color: #333;
+    margin-top: 3%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2%;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 1%;
+    text-align: left;
+    
+
+}
+
+table th {
+    background-color: red;
+    font-size: 100%;
+    
+
+}
+
+
+table td:first-child{
+    width: 10%;
+    
+}
+
+table td:nth-child(2) {
+    width: 50%;
+    /* font-size: 20px; */
+}
+
+table td:nth-child(3){
+    width: 25%;
+}
+
+table td:nth-child(4){
+    width: 10% 
+}
+
+table img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* styles pour les boutons d'action */
+.btn .modifier, .effacer {
+    padding: 5px 10px;
+    text-decoration: none;
+    width: 30%;
+}
+
+/* styles pour le formulaire */
+
+
+form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+form input, textarea {
+    width: 95%;
+    padding: 1%;
+    margin-bottom: 1%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #218838;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+   
+    table th {
+    background-color: blue;
+    
+
+}
+
+table td:nth-child(2) {
+    width: 70%;
+    font-size: 15px;
+}
+
+
+}

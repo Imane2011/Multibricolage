@@ -1,0 +1,29 @@
+<body>
+<script src="assets/js/connexion.js"></script>
+<main class="connexion">
+    <h1 class="titreConnexion">Connexion</h1>
+    <form class="formConnexion" action="assets/php/connexion.php" method="POST">
+        <div class="form-group">
+            <label class="labelConnexion" for="email">Email :</label>
+            <input type="email" id="email" name="email" required placeholder="Indiquer votre email">
+        </div>
+        <div class="form-group">
+            <label class="labelConnexion" for="mdp">Mot de passe :</label>
+            <input type="password" id="mdp" name="mdp" required placeholder="Entrer votre mot de passe">
+            <button type="button" class="voir" onclick="togglePassword('mdp', this)">
+                <img class="eye-icon" src="assets/img/oeil.png" alt="afficher le mot de passe" id="eye-open-mdp">
+                <img class="eye-icon" src="assets/img/cacher.png" alt="cacher le mot de passe" id="eye-closed-mdp" style="display:none;">
+            </button>
+        </div>
+        <button class="btn_connexion" type="submit" name="submitConnexion">Se connecter</button>
+    </form>
+    <div class="register-link">
+        <p classe="inscrire">
+            Pas encore de compte ? 
+            <a href="?route=inscription">S'inscrire ici</a>
+        </p>
+    </div>
+</main>
+    
+</body>
+</html>

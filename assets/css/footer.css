@@ -1,0 +1,68 @@
+footer{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    background-color:  #4B3B2A; 
+    
+   
+   
+}
+
+.desktopFooter{
+    margin-bottom: 2%;
+}
+
+.menuFooter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+
+.menuList{
+    display: flex;
+    
+
+   
+}
+
+.navbarListFooter {
+    list-style: none;
+    color: aliceblue;
+    width: 100px;
+}
+
+.navbarListFooter a {
+    color: aliceblue;
+    text-decoration: none;
+    /* margin: 2%; */
+}
+
+.navbarListFooter a:hover{
+    color: #D8A848;
+}
+
+
+.mentions a{
+     text-decoration: none; 
+     color: white;
+}
+
+.mentions a:hover{
+    color: #D8A848;
+
+}
+
+.adresse{
+      margin-top: 2%;
+}
+ .adresse a{
+     text-decoration: none; 
+     color: white;
+   
+}
+
+.adresse a:hover{
+    color: #D8A848;
+}

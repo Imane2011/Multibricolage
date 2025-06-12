@@ -1,0 +1,173 @@
+/* styles pour le corps de la page */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+/* styles pour l'en-tête */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+}
+
+.menuDesktop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo img {
+    height: 50px;
+}
+
+nav.desktop {
+    display: flex;
+}
+
+.menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.navbarList {
+    margin: 0 15px;
+}
+
+.navbarList a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.navbarList a:hover {
+    color: #ff9900;
+}
+
+/* styles pour le menu mobile */
+.menuMobile {
+    display: none;
+}
+
+.burgerLogo {
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+}
+
+.burgerHiden {
+    display: none;
+}
+
+/* styles pour le contenu principal */
+main {
+    margin-top: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+.titre{
+    display: flex;
+    justify-content: space-around;
+}
+
+/* styles pour le tableau de bord */
+.dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10%;
+}
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    width: 200px;
+}
+
+.card h2 {
+    color: #333;
+}
+
+.card p {
+    font-size: 2em;
+    margin: 10px 0;
+}
+
+.btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btnDeconnexion {
+    background-color: #ff9900;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    float: right;
+   
+}
+
+
+
+
+
+.btnDeconnexion:hover {
+    background-color: #e68a00;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+     h1{
+        font-size: 15px;
+        margin-top: 10px;
+     }
+
+    .menuDesktop {
+        display: none;
+    }
+
+    .menuMobile {
+        display: block;
+    }
+
+    .burgerHiden {
+        display: block;
+    }
+
+    .burger {
+        display: none;
+    }
+
+    .burger.active {
+        display: block;
+    }
+
+    .dashboard {
+        flex-direction: column;
+        align-items: center;
+    }
+}

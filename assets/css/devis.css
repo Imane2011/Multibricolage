@@ -1,0 +1,83 @@
+@font-face {
+    font-family: "openSans";
+    src:
+      local("OpenSans"),
+      url("../fonts/OpenSans-VariableFont_wdth\,wght.ttf")
+    }
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.titreDevis{
+    margin: 2%;
+    font-size: 2.5rem;
+    text-align: center;
+    font-family: "OpenSans";
+    background-color: #D8A848;
+    box-shadow: 10px 5px 8px #D8A848;
+  }
+
+.formDevis{
+    background-color: beige;
+    width: 70%;
+    border: 2px solid #D8A848;
+    border-radius: 2%;
+    margin-bottom: 2%;
+    margin-left: 15%;
+    margin-right: 10%;
+    margin-top: 5%;   
+}
+
+.labelDevis{
+    
+    display: block;
+    font-weight: bold;
+    font-size: large;
+    margin-bottom: 1%;
+    margin-left: 2%;
+}
+
+.formGroup1{
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+
+.formGroup1 input,  textarea, .select{
+    width: 90%;
+    margin-left: 2%;
+    margin-right: 2%;
+    padding: 1%;
+}
+
+.btnDevis{
+    margin-top: 1%;
+    margin-left: 7%;
+    margin-bottom: 1%;
+
+}
+
+.submitDevis{
+    width: 20%;
+    background-color: #D8A848;
+    padding: 1%;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    font-size: large;
+}
+
+@media (max-width: 767px){
+    .titreDevis{
+        font-size: 1.5rem;
+    }
+    
+    .submitDevis{
+        margin-top: 4%;
+        margin-bottom: 2%;
+        font-size: medium;
+        width: 90%;
+    }
+}
