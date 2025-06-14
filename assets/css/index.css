@@ -18,8 +18,8 @@
 .background{
     display: flex;
     align-items: center;
-    background: url('bricolage.jpg') no-repeat center/cover;
-    color :white;
+    background: url('../img/bricolage.jpg') no-repeat center/cover;
+    color :#FFFFFF;
     /* padding : 4rem, 2rem; */
     text-align: center; 
     height: 30vh;  

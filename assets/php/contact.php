@@ -1,10 +1,7 @@
  <?php
 
 // Connection à la BDD
-$dsn = "mysql:dbname=multibricolage;host=localhost;port=3306";
-$user = "root";
-$password = "";
-$dbh = new PDO($dsn, $user, $password,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
+require("./db.php");
 
 
 require ('../../vendor/autoload.php');
@@ -17,55 +14,35 @@ class Contact{
     private $prenom;
     private $email;
     private $tel;
-    private $adresse;
-    private $codePostal;
-    private $ville;
-    private $pays;
     private $sujet;
     private $message;
 
-    public function __construct($nom, $prenom, $email, $tel, $adresse, $codePostal, $ville, $pays, $sujet, $message){
+    public function __construct($nom, $prenom, $email, $tel, $sujet, $message){
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->email = $email;
         $this->tel = $tel;
-         $this->adresse = $adresse;
-        $this->codePostal = $codePostal;
-        $this->ville = $ville;
-        $this->pays = $pays;
         $this->sujet = $sujet;
         $this->message = $message;
     }
 
     public function envoyerMessage($dbh){
-
-        $sql= "INSERT INTO adresse (rue, code_postal, ville, pays)
-                VALUE (:rue, :cp, :ville, :pays)";
-                $req = $dbh->prepare($sql);
-                $req->bindParam(":rue", $this->adresse, PDO::PARAM_STR);
-                $req->bindParam(":cp", $this->codePostal, PDO::PARAM_STR);
-                $req->bindParam(":ville", $this->ville, PDO::PARAM_STR);
-                $req->bindParam(":pays", $this->pays, PDO::PARAM_STR);
-                 if($req->execute()){
-                // Récupérer le dernier id_adresse inséré
-        $id_adresse = $dbh->lastInsertId();
-                        $sql = "INSERT INTO clients (nom, prenom, email, telephone, id_adresse_client)
-                        VALUE (:nom, :prenom, :email, :tel, :id_adresse)";
-                        $req = $dbh->prepare($sql);
-                        $req->bindParam(":nom", $this->nom, PDO::PARAM_STR);
-                        $req->bindParam(":prenom", $this->prenom, PDO::PARAM_STR);
-                        $req->bindParam(":email", $this->email, PDO::PARAM_STR);
-                        $req->bindParam(":tel", $this->tel, PDO::PARAM_STR);
-                        $req->bindParam(":id_adresse", $id_adresse, PDO::PARAM_INT);
-                }
-            if($req->execute()){
+        $sql = "INSERT INTO clients (nom, prenom, email, telephone)
+        VALUE (:nom, :prenom, :email, :tel)";
+        $req = $dbh->prepare($sql);
+        $req->bindParam(":nom", $this->nom, PDO::PARAM_STR);
+        $req->bindParam(":prenom", $this->prenom, PDO::PARAM_STR);
+        $req->bindParam(":email", $this->email, PDO::PARAM_STR);
+        $req->bindParam(":tel", $this->tel, PDO::PARAM_STR);
+    
+        if($req->execute()){
          // Récupérer le dernier id_adresse inséré
         $id_client = $dbh->lastInsertId();
-                            $sql = "INSERT INTO contact (sujet, message, id_client) VALUES (:sujet, :message, :id_client)";
+                            $sql = "INSERT INTO contact (sujet, message, client_id) VALUES (:sujet, :message, :client_id)";
                             $req = $dbh->prepare($sql);
                             $req->bindValue(':sujet',$this->sujet,PDO::PARAM_STR);
                             $req->bindValue(':message',$this->message,PDO::PARAM_STR);
-                            $req->bindParam(":id_client", $id_client, PDO::PARAM_INT);
+                            $req->bindParam(":client_id", $id_client, PDO::PARAM_INT);
 
        
             if($req->execute()){
@@ -119,9 +96,9 @@ public function envoyerMail(){
 }
 
 
-    if(isset($_POST["submit"]) && !empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["email"]) && !empty($_POST["telephone"]) && !empty($_POST["adresse"]) && !empty($_POST["CP"])&& !empty($_POST["ville"])&& !empty($_POST["pays"])&& !empty($_POST["sujet"]) && !empty($_POST["message"])){
+    if(isset($_POST["submit"]) && !empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["email"]) && !empty($_POST["telephone"]) && !empty($_POST["sujet"]) && !empty($_POST["message"])){
     var_dump($_POST);
-    $contact = new Contact($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['telephone'], $_POST['adresse'], $_POST["CP"], $_POST["ville"], $_POST["pays"], $_POST["sujet"], $_POST["message"]);
+    $contact = new Contact($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['telephone'], $_POST["sujet"], $_POST["message"]);
     $contact->envoyerMessage($dbh);
 }
 

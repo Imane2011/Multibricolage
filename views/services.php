@@ -1,12 +1,9 @@
 
 <?php
 // Connexion à la base
-$dsn = "mysql:dbname=multi;host=localhost;port=3306";
-$user = "root";
-$password = "";
-$dbh = new PDO($dsn, $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8'));
+require("assets/php/db.php");
 
-$sql = "SELECT * FROM services";
+$sql = "SELECT * FROM page_services";
 $req = $dbh->prepare($sql);
 $req->execute();
 $services = $req->fetchAll(PDO::FETCH_ASSOC);

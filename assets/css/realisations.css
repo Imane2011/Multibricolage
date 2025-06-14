@@ -24,7 +24,7 @@
     align-items: center;
     margin-top: 5%;
 
-    height: 80vh;
+    height: 100vh;
     width: 80%;
     position: relative;
 
@@ -42,8 +42,8 @@
 
   .slide img{
     position: absolute;
-    width: 50%;
-    height: auto;
+    width: 60%;
+    height: 99%;
     opacity: 0;
   }
 

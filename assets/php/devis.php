@@ -1,10 +1,7 @@
 <?php
 
 // Connection à la BDD
-$dsn = "mysql:dbname=multibricolage;host=localhost;port=3306";
-$user = "root";
-$password = "";
-$dbh = new PDO($dsn, $user, $password,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
+require("./db.php");
 
 require ('../../vendor/autoload.php');
 use PHPMailer\PHPMailer\PHPMailer;
@@ -38,8 +35,7 @@ class Devis{
     }
 
     public function envoyerDevis($dbh){
-
-        $sql= "INSERT INTO adresse (rue, code_postal, ville, pays)
+        $sql= "INSERT INTO adresses (rue, code_postal, ville, pays)
                 VALUE (:rue, :cp, :ville, :pays)";
                 $req = $dbh->prepare($sql);
                 $req->bindParam(":rue", $this->adresse, PDO::PARAM_STR);
@@ -47,25 +43,25 @@ class Devis{
                 $req->bindParam(":ville", $this->ville, PDO::PARAM_STR);
                 $req->bindParam(":pays", $this->pays, PDO::PARAM_STR);
                  if($req->execute()){
-                // Récupérer le dernier id_adresse inséré
+         // Récupérer le dernier id_adresse inséré
         $id_adresse = $dbh->lastInsertId();
-                        $sql = "INSERT INTO clients (nom, prenom, email, telephone, id_adresse_client)
+                $sql = "INSERT INTO clients (nom, prenom, email, telephone, id_adresse_client)
                         VALUE (:nom, :prenom, :email, :tel, :id_adresse)";
-                        $req = $dbh->prepare($sql);
-                        $req->bindParam(":nom", $this->nom, PDO::PARAM_STR);
-                        $req->bindParam(":prenom", $this->prenom, PDO::PARAM_STR);
-                        $req->bindParam(":email", $this->email, PDO::PARAM_STR);
-                        $req->bindParam(":tel", $this->tel, PDO::PARAM_STR);
-                        $req->bindParam(":id_adresse", $id_adresse, PDO::PARAM_INT);
+                $req = $dbh->prepare($sql);
+                $req->bindParam(":nom", $this->nom, PDO::PARAM_STR);
+                $req->bindParam(":prenom", $this->prenom, PDO::PARAM_STR);
+                $req->bindParam(":email", $this->email, PDO::PARAM_STR);
+                $req->bindParam(":tel", $this->tel, PDO::PARAM_STR);
+                $req->bindParam(":id_adresse", $id_adresse, PDO::PARAM_INT);
                 }
             if($req->execute()){
          // Récupérer le dernier id_adresse inséré
-        $id_client = $dbh->lastInsertId();
-                            $sql = "INSERT INTO devis (service, info_complementaire, id_client) VALUES (:service, :info, :id_client)";
-                            $req = $dbh->prepare($sql);
-                            $req->bindValue(':service',$this->services,PDO::PARAM_STR);
-                            $req->bindValue(':info',$this->informations,PDO::PARAM_STR);
-                            $req->bindParam(":id_client", $id_client, PDO::PARAM_INT);
+            $id_client = $dbh->lastInsertId();
+                $sql = "INSERT INTO devis (services, info_complementaire, client_id) VALUES (:service, :info, :client_id)";
+                $req = $dbh->prepare($sql);
+                $req->bindValue(':service',$this->services,PDO::PARAM_STR);
+                $req->bindValue(':info',$this->informations,PDO::PARAM_STR);
+                $req->bindParam(":client_id", $id_client, PDO::PARAM_INT);
 
        
             if($req->execute()){
@@ -120,6 +116,5 @@ class Devis{
     $contact = new Devis($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['telephone'], $_POST['adresse'], $_POST["CP"], $_POST["ville"], $_POST["pays"], $_POST['services'], $_POST["info"]);
     $contact->envoyerDevis($dbh);
 }
-
 
 ?>

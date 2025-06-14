@@ -8,7 +8,7 @@ if (!isset($_SESSION['id'])) {
 }
 require("assets/php/db.php");
 // Récupération des services
-$sql = "SELECT * FROM realisations";
+$sql = "SELECT * FROM page_realisations";
 $req = $dbh->prepare($sql);
 $req->execute();
 $realisations = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -16,14 +16,15 @@ $realisations = $req->fetchAll(PDO::FETCH_ASSOC);
 // Ajout d'un nouveau service
 if (isset($_POST['submit']) && !isset($_GET['action'])) {
   
-
+    $admin_id = $_SESSION['id'];
     $image = $_FILES['image']['name'];
     $target = "assets/img/" . basename($image);
 
     if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-        $sql = "INSERT INTO realisations (image) VALUES (:image)";
+        $sql = "INSERT INTO page_realisations (image, admin_id) VALUES (:image, :admin_id)";
         $req = $dbh->prepare($sql);
         $req->bindParam(':image', $target, PDO::PARAM_STR);
+        $req->bindParam(':admin_id', $admin_id, PDO::PARAM_INT);
         if ($req->execute()){
             header("Location:index.php?route=realisations_dsh");
             exit;
@@ -40,9 +41,9 @@ if (isset($_POST['submit']) && !isset($_GET['action'])) {
 if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    $sql = "SELECT * FROM realisations WHERE id = :id";
+    $sql = "SELECT * FROM page_realisations WHERE id_realisation = :id_realisation";
     $req = $dbh->prepare($sql);
-    $req->bindParam(':id', $id, PDO::PARAM_INT);
+    $req->bindParam(':id_realisation', $id, PDO::PARAM_INT);
     $req->execute();
     $realisation = $req->fetch(PDO::FETCH_ASSOC);
 
@@ -52,11 +53,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
 
         if (!empty($image)) {
             move_uploaded_file($_FILES['image']['tmp_name'], $target);
-            $sql = "UPDATE realisations SET image = :image WHERE id = :id";
+            $sql = "UPDATE page_realisations SET image = :image WHERE id_realisation = :id_realisation";
         }
 
         $req = $dbh->prepare($sql);
-        $req->bindParam(':id', $id, PDO::PARAM_INT);
+        $req->bindParam(':id_realisation', $id, PDO::PARAM_INT);
         if (!empty($image)) {
             $req->bindParam(':image', $target, PDO::PARAM_STR);
         }
@@ -65,7 +66,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
             header("location: index.php?route=realisations_dsh");
             exit();
             } else {
-                echo "Erreur lors de la modification du service.";
+                echo "Erreur lors de la modification du realisation.";
         }
     }
 }
@@ -74,9 +75,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
 if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    $sql = "DELETE FROM realisations WHERE id = :id";
+    $sql = "DELETE FROM page_realisations WHERE id_realisation = :id_realisation";
     $req = $dbh->prepare($sql);
-    $req->bindParam(':id', $id, PDO::PARAM_INT);
+    $req->bindParam(':id_realisation', $id, PDO::PARAM_INT);
     if ($req->execute()) {
         header("location: index.php?route=realisations_dsh");
         exit();
@@ -141,8 +142,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
                 
                     <td><img src="<?= htmlspecialchars($rls['image']) ?>"></td>
                     <td>
-                        <a class="btn" href="?route=realisations_dsh&action=edit&id=<?= $rls['id'] ?>"><img class="modifier" src="assets/img/modifier.png" alt="Modifier la réalisation"></a>
-                        <a class="btn" onclick="return confirm('Confirmer la suppression ?');" href="?route=realisations_dsh&action=delete&id=<?= $rls['id'] ?>"><img class="effacer" src="assets/img/effacer.png" alt="Effacer la réalisation"></a>
+                        <a class="btn" href="?route=realisations_dsh&action=edit&id=<?= $rls['id_realisation'] ?>"><img class="modifier" src="assets/img/modifier.png" alt="Modifier la réalisation"></a>
+                        <a class="btn" onclick="return confirm('Confirmer la suppression ?');" href="?route=realisations_dsh&action=delete&id=<?= $rls['id_realisation'] ?>"><img class="effacer" src="assets/img/effacer.png" alt="Effacer la réalisation"></a>
                     </td>
                 </tr>
             <?php endforeach; ?>

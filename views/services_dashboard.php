@@ -1,5 +1,4 @@
 <?php
-//connexion à la BDD
 if(session_status() !== PHP_SESSION_ACTIVE) session_start();
 // on verifie si l'utilisateur est connécté
 if (!isset($_SESSION['id'])) {
@@ -9,7 +8,7 @@ if (!isset($_SESSION['id'])) {
 }
 require("assets/php/db.php");
 // Récupération des services
-$sql = "SELECT * FROM services";
+$sql = "SELECT * FROM page_services";
 $req = $dbh->prepare($sql);
 $req->execute();
 $services = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -18,16 +17,17 @@ $services = $req->fetchAll(PDO::FETCH_ASSOC);
 if (isset($_POST['submit']) && !isset($_GET['action'])) {
     $titre = $_POST['titre'];
     $description = $_POST['description'];
-
+    $admin_id = $_SESSION['id'];
     $image = $_FILES['image']['name'];
     $target = "assets/img/" . basename($image);
 
     if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-        $sql = "INSERT INTO services (titre, description, image) VALUES (:titre, :description, :image)";
+        $sql = "INSERT INTO page_services (titre, description, image, admin_id) VALUES (:titre, :description, :image, :admin_id)";
         $req = $dbh->prepare($sql);
         $req->bindParam(':titre', $titre, PDO::PARAM_STR);
         $req->bindParam(':description', $description, PDO::PARAM_STR);
         $req->bindParam(':image', $target, PDO::PARAM_STR);
+        $req->bindParam(':admin_id', $admin_id, PDO::PARAM_INT);
         if ($req->execute()) {
             echo "Service ajouté avec succès";
             header("Location: index.php?route=services_dsh");
@@ -45,31 +45,31 @@ if (isset($_POST['submit']) && !isset($_GET['action'])) {
 // Modification
 if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
     $id = $_GET['id'];
-
-    $sql = "SELECT * FROM services WHERE id = :id";
+    $sql = "SELECT * FROM page_services WHERE id_service = :id_service";
     $req = $dbh->prepare($sql);
-    $req->bindParam(':id', $id, PDO::PARAM_INT);
+    $req->bindParam(':id_service', $id, PDO::PARAM_INT);
     $req->execute();
     $service = $req->fetch(PDO::FETCH_ASSOC);
 
     if (isset($_POST['submit'])) {
         $titre = $_POST['titre'];
         $description = $_POST['description'];
+        // $admin_id = $_SESSION['id'];
 
         $image = $_FILES['image']['name'];
         $target = "assets/img/" . basename($image);
 
         if (!empty($image)) {
             move_uploaded_file($_FILES['image']['tmp_name'], $target);
-            $sql = "UPDATE services SET titre = :titre, description = :description, image = :image WHERE id = :id";
+            $sql = "UPDATE page_services SET titre = :titre, description = :description, image = :image WHERE id_service = :id_service";
         } else {
-            $sql = "UPDATE services SET titre = :titre, description = :description WHERE id = :id";
+            $sql = "UPDATE page_services SET titre = :titre, description = :description WHERE id_service = :id_service";
         }
 
         $req = $dbh->prepare($sql);
         $req->bindParam(':titre', $titre, PDO::PARAM_STR);
         $req->bindParam(':description', $description, PDO::PARAM_STR);
-        $req->bindParam(':id', $id, PDO::PARAM_INT);
+        $req->bindParam(':id_service', $id, PDO::PARAM_INT);
         if (!empty($image)) {
             $req->bindParam(':image', $target, PDO::PARAM_STR);
         }
@@ -87,9 +87,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
 if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    $sql = "DELETE FROM services WHERE id = :id";
+    $sql = "DELETE FROM page_services WHERE id_service = :id_service";
     $req = $dbh->prepare($sql);
-    $req->bindParam(':id', $id, PDO::PARAM_INT);
+    $req->bindParam(':id_service', $id, PDO::PARAM_INT);
     if ($req->execute()){
         header("location: index.php?route=services_dsh");
         exit();
@@ -155,13 +155,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id']))
         <tbody>
             <?php foreach ($services as $srv): ?>
                 <tr>
-                  
                     <td><?= htmlspecialchars($srv['titre']) ?></td>
                     <td><?= htmlspecialchars($srv['description']) ?></td>
                     <td><img src="<?= htmlspecialchars($srv['image']) ?>" alt="<?= htmlspecialchars($srv['titre']) ?>"></td>
                     <td>
-                        <a class="btn" href="?route=services_dsh&action=edit&id=<?= $srv['id'] ?>"><img class="modifier" src="assets/img/modifier.png" alt="Modifier le service"></a>
-                        <a class="btn" onclick="return confirm('Confirmer la suppression ?');" href="?route=services_dsh&action=delete&id=<?= $srv['id'] ?>"><img class="effacer" src="assets/img/effacer.png" alt="Effacer la réalisation"></a>
+                        <a class="btn" href="?route=services_dsh&action=edit&id=<?= $srv['id_service'] ?>"><img class="modifier" src="assets/img/modifier.png" alt="Modifier le service"></a>
+                        <a class="btn" onclick="return confirm('Confirmer la suppression ?');" href="?route=services_dsh&action=delete&id=<?= $srv['id_service'] ?>"><img class="effacer" src="assets/img/effacer.png" alt="Effacer la réalisation"></a>
                     </td>
                 </tr>
             <?php endforeach; ?>

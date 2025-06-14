@@ -1,10 +1,7 @@
 <?php
 ini_set('display_errors',true);
 session_start();
-$dsn = "mysql:dbname=multi;host=localhost;port=3306";
-$user = "root";
-$password = "";
-$dbh = new PDO($dsn, $user, $password,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
+require("./db.php");
 
 class Utilisateur{
     private $email;
@@ -16,7 +13,7 @@ class Utilisateur{
     }
 
     public function connexion($dbh){
-        $sql = "SELECT * FROM administrateurs WHERE email = :email";
+        $sql = "SELECT * FROM admins WHERE email = :email";
         $req = $dbh->prepare($sql);
         $req->bindParam(":email", $this->email, PDO::PARAM_STR);
         if($req->execute()){
@@ -28,10 +25,9 @@ class Utilisateur{
                     $_SESSION['id'] = $resultat['id'];
                     setcookie('token', $token, time() + 7200, "/");
                     header("Location: ../../index.php?route=admin");
+                    exit();
                 } else {
                    echo 'Mauvais mot de passe !';
-    echo 'Mot de passe saisi : ' . $this->password;
-    echo 'Mot de passe hashé : ' . $resultat['motDePasse'];
                 }
             } else {
                 echo "Aucun email correspondant !";
