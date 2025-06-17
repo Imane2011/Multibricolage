@@ -106,7 +106,7 @@ h1 {
     margin: 10px 0;
 }
 
-.btn {
+.btn_accueil {
     background-color: #007BFF;
     color: white;
     padding: 10px 15px;
@@ -115,7 +115,7 @@ h1 {
     transition: background-color 0.3s;
 }
 
-.btn:hover {
+.btn_accueil:hover {
     background-color: #0056b3;
 }
 

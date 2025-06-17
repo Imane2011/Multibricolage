@@ -1,0 +1,143 @@
+<?php
+// Inclusion des fichiers nécessaires pour la vérification de la connexion et la base de données
+require("assets/php/check_connexion.php");
+require("assets/php/db.php");
+
+// Définition de la classe Service
+class Service {
+    private $dbh; // Propriété pour la connexion à la base de données
+
+    // Constructeur pour initialiser la connexion à la base de données
+    public function __construct($dbh) {
+        $this->dbh = $dbh; // Assignation de la connexion à la propriété
+    }
+
+    // Méthode pour récupérer tous les services
+    public function getServices() {
+        $sql = "SELECT * FROM page_services"; // Requête SQL pour sélectionner tous les services
+        $req = $this->dbh->prepare($sql); // Préparation de la requête
+        $req->execute(); // Exécution de la requête
+        return $req->fetchAll(PDO::FETCH_ASSOC); // Retourne tous les services sous forme de tableau associatif
+    }
+
+    // Méthode pour ajouter un nouveau service
+    public function addService($titre, $description, $admin_id, $image) {
+        $target = "assets/img/" . basename($image); // Chemin de destination de l'image
+
+        // Déplacement du fichier téléchargé vers le dossier cible
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+            $sql = "INSERT INTO page_services (titre, description, image, admin_id) VALUES (:titre, :description, :image, :admin_id)";
+            $req = $this->dbh->prepare($sql); // Préparation de la requête
+            // Liaison des paramètres
+            $req->bindParam(':titre', $titre, PDO::PARAM_STR);
+            $req->bindParam(':description', $description, PDO::PARAM_STR);
+            $req->bindParam(':image', $target, PDO::PARAM_STR);
+            $req->bindParam(':admin_id', $admin_id, PDO::PARAM_INT);
+
+            // Exécution de la requête et redirection en cas de succès
+            if ($req->execute()) {
+                echo "Service ajouté avec succès";
+                header("Location: index.php?route=services_dsh");
+                exit();
+            } else {
+                echo "Erreur lors de l'ajout du service";
+            }
+        } else {
+            echo "Erreur lors du téléchargement de l'image.";
+        }
+    }
+
+    // Méthode pour modifier un service existant
+    public function editService($id, $titre, $description, $image) {
+        $target = "assets/img/" . basename($image); // Chemin de destination de l'image
+
+        // Si une nouvelle image est fournie, on met à jour le service avec l'image
+        if (!empty($image)) {
+            move_uploaded_file($_FILES['image']['tmp_name'], $target);
+            $sql = "UPDATE page_services SET titre = :titre, description = :description, image = :image WHERE id_service = :id_service";
+        } else {
+            // Sinon, on met à jour sans changer l'image
+            $sql = "UPDATE page_services SET titre = :titre, description = :description WHERE id_service = :id_service";
+        }
+
+        $req = $this->dbh->prepare($sql); // Préparation de la requête
+        // Liaison des paramètres
+        $req->bindParam(':titre', $titre, PDO::PARAM_STR);
+        $req->bindParam(':description', $description, PDO::PARAM_STR);
+        $req->bindParam(':id_service', $id, PDO::PARAM_INT);
+        if (!empty($image)) {
+            $req->bindParam(':image', $target, PDO::PARAM_STR);
+        }
+
+        // Exécution de la requête et redirection en cas de succès
+        if ($req->execute()) {
+            header("location: index.php?route=services_dsh");
+            exit();
+        } else {
+            echo "Erreur lors de la modification du service.";
+        }
+    }
+
+    // Méthode pour supprimer un service
+    public function deleteService($id) {
+        $sql = "DELETE FROM page_services WHERE id_service = :id_service"; // Requête SQL pour supprimer le service
+        $req = $this->dbh->prepare($sql); // Préparation de la requête
+        $req->bindParam(':id_service', $id, PDO::PARAM_INT); // Liaison du paramètre
+
+        // Exécution de la requête et redirection en cas de succès
+        if ($req->execute()) {
+            header("location: index.php?route=services_dsh");
+            exit();
+        } else {
+            echo "Erreur lors de la suppression du service.";
+        }
+    }
+}
+
+// Instanciation de la classe Service
+$serviceManager = new Service($dbh);
+
+// Récupération des services
+$services = $serviceManager->getServices();
+
+// Ajout d'un nouveau service
+if (isset($_POST['submit']) && !isset($_GET['action'])) {
+    $titre = $_POST['titre'];
+    $description = $_POST['description'];
+    $admin_id = $_SESSION['id'];
+    $image = $_FILES['image']['name'];
+    
+    // Appel de la méthode pour ajouter un service
+    $serviceManager->addService($titre, $description, $admin_id, $image);
+}
+
+// Modification d'un service
+if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
+    $id = $_GET['id'];
+    
+    // Récupération du service à modifier
+    $sql = "SELECT * FROM page_services WHERE id_service = :id_service";
+    $req = $dbh->prepare($sql);
+    $req->bindParam(':id_service', $id, PDO::PARAM_INT);
+    $req->execute();
+    $service = $req->fetch(PDO::FETCH_ASSOC);
+
+    // Si le formulaire de modification est soumis
+    if (isset($_POST['submit'])) {
+        $titre = $_POST['titre'];
+        $description = $_POST['description'];
+        $image = $_FILES['image']['name'];
+
+        // Appel de la méthode pour modifier le service
+        $serviceManager->editService($id, $titre, $description, $image);
+    }
+}
+
+// Suppression d'un service
+if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['id'])) {
+    $id = $_GET['id'];
+    
+    // Appel de la méthode pour supprimer le service
+    $serviceManager->deleteService($id);
+}
+?>

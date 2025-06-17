@@ -57,32 +57,31 @@ table th, table td {
 }
 
 table th {
-    background-color: red;
     font-size: 100%;
     
 
 }
 
 
-table td:first-child{
+.tableService .tdService:first-child{
     width: 10%;
     
 }
 
-table td:nth-child(2) {
+.tableService .tdService:nth-child(2) {
     width: 50%;
     /* font-size: 20px; */
 }
 
-table td:nth-child(3){
+.tableService .tdService:nth-child(3){
     width: 25%;
 }
 
-table td:nth-child(4){
+.tableService .tdService:nth-child(4){
     width: 10% 
 }
 
-table img {
+.tableService img {
     max-width: 100%;
     height: auto;
 }
@@ -126,16 +125,14 @@ form button:hover {
 
 /* Responsive design */
 @media (max-width: 768px) {
-   
-    table th {
-    background-color: blue;
-    
+ .tableService .thService {
+    /* width: 50%; */
+    font-size: 10px;
+}   
 
-}
-
-table td:nth-child(2) {
-    width: 70%;
-    font-size: 15px;
+.tableService .tdService {
+    width: 50%;
+    font-size: 12px;
 }
 
 

@@ -113,7 +113,6 @@ table th, table td {
 }
 
 table th {
-    background-color: red;
     font-size: 100%;
     
 
@@ -177,12 +176,6 @@ form button:hover {
 /* Responsive design */
 @media (max-width: 768px) {
 
-
-    table th {
-    background-color: blue;
-    
-
-}
 
 table td:nth-child(2) {
     width: 70%;

@@ -25,7 +25,7 @@
 <body>
     <header>
       <div class=menuDesktop>
-        <div class="logo"><a href="?route="><img src="assets/img/Média-removebg-preview.png" alt="logo multibricolage"></a></div>
+        <div class="logo"><a href="?route="><img src="assets/img/logo.webp" alt="logo multibricolage"></a></div>
         <nav class=desktop>
             <ul class="menu">
                 <li class="navbarList"><a href="?route=">Entreprise</a></li>

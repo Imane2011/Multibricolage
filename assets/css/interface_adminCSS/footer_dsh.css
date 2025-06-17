@@ -1,15 +1,15 @@
 footer{
     padding-top: 2%;
     padding-bottom: 2%;
+    margin-top: 2%;
     background-color:  #4B3B2A; 
-
     
    
    
 }
 
 .desktopFooter{
-    margin-bottom: 2%;
+    margin-bottom: 1%;
 }
 
 .menuFooter{
@@ -32,12 +32,12 @@ footer{
     list-style: none;
     color: aliceblue;
     width: 100px;
+    font-size: 15px;
 }
 
 .navbarListFooter a {
     color: aliceblue;
     text-decoration: none;
-    /* margin: 2%; */
 }
 
 .navbarListFooter a:hover{
@@ -48,6 +48,7 @@ footer{
 .mentions a{
      text-decoration: none; 
      color: white;
+     font-size: 15px;
 }
 
 .mentions a:hover{
@@ -61,9 +62,32 @@ footer{
  .adresse a{
      text-decoration: none; 
      color: white;
+     font-size: 15px;
    
 }
 
 .adresse a:hover{
     color: #D8A848;
 }
+
+
+@media (max-width:767px){
+
+    .navbarListFooter {
+    font-size: 12px;
+}
+
+
+.mentions a{
+
+     font-size: 12px;
+}
+
+ .adresse a{
+     font-size: 12px;
+   
+}
+
+
+}
+

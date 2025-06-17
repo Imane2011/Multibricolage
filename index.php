@@ -11,6 +11,17 @@ if(!empty($_GET['route'])){
 }
 
 switch($route){
+ // Vue services
+    case 'entreprise':
+    $titrePage = 'entrprise';
+    include('./views/header.php');
+    require("views/index.html");
+    include('./views/footer.php');
+    break;
+}
+   
+
+switch($route){
     // Vue services
     case 'services':
         $titrePage = 'services';
@@ -70,23 +81,23 @@ switch($route){
      // Vue admin
     case 'admin':
         $titrePage = 'admin';
-        // include('./views/header.php');
+        include('./views/header_dsh.php');
         require("./views/admin.php");
-        // include('./views/footer.php');
+        include('./views/footer_dsh.php');
     break;
 
     case 'services_dsh':
         $titrePage = 'services_dsh';
-        // include('./views/header.php');
+        include('./views/header_dsh.php');
         require("./views/services_dashboard.php");
-        // include('./views/footer.php');
+        include('./views/footer_dsh.php');
     break;
 
      case 'realisations_dsh':
         $titrePage = 'realisations_dsh';
-        // include('./views/header.php');
+        include('./views/header_dsh.php');
         require("./views/realisations_dashboard.php");
-        // include('./views/footer.php');
+        include('./views/footer_dsh.php');
     break;
 
 
@@ -96,12 +107,16 @@ switch($route){
         $titrePage = 'Accueil';
         $template = file_get_contents('./views/index.html');
         
+        
     break;
 }
 
 if (isset($template)){
     include('./views/header.php');
+   
     echo $template;
     include('./views/footer.php');
+    //  include('./views/header_dsh.php');
+    // include('./views/footer_dsh.php');
 }
 ?>

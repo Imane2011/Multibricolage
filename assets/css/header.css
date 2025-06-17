@@ -169,12 +169,9 @@ header{
     }
 
 
-
-
-
     .burgerLogo, .burgerHiden {
         cursor: pointer;
-        font-size: 2rem; /* Ajustez la taille selon vos besoins */
+        font-size: 2rem; 
         color: white;
     } 
 }

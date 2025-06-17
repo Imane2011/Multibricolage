@@ -10,19 +10,13 @@
     padding: 0%;
 }
 
-.accueil{
-    height: 100vh;
-}
-
-
 .background{
     display: flex;
     align-items: center;
-    background: url('../img/bricolage.jpg') no-repeat center/cover;
+    background: url('../img/bricolage.webp') no-repeat center/cover;
     color :#FFFFFF;
-    /* padding : 4rem, 2rem; */
     text-align: center; 
-    height: 30vh;  
+    height: 50vh;  
 }
 
 .paragAccueil{
